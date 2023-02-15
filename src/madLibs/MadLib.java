@@ -3,28 +3,44 @@ package madLibs;
 public class MadLib {
 
 	
-	String[] str;
-	int arrayCounter;
+	private String[] str = new String[20];
+	private int arrayCounter;
 	public MadLib(String mL) {
+		
 		for(int i = 0; i< mL.length(); i++) {
 			
 			if(mL.charAt(i) == ' ') {
 				arrayCounter++;
 			}
 			else {
-				str[arrayCounter] += mL.charAt(i);
+				if(str[arrayCounter] == null) {
+					str[arrayCounter] = String.valueOf(mL.charAt(i));
+				}
+				else {
+				str[arrayCounter] += String.valueOf(mL.charAt(i));
+				}
 			}
 		}
-		
-		
-		
-		
 	}
+	
 
 
+	public String toString() {
+		String ret = "";
+		int counter = 0;
+		while (str[counter] != null) {
+			ret += str[counter] + " ";
+			counter++;
+		}
+		return ret;
+	}
 
 	public String[] getArray() {
 		return str;
+	}
+	
+	public void userInput(int index, String word) {
+		str[index] = word;
 	}
 	
 }
