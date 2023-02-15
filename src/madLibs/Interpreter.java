@@ -71,7 +71,4 @@ public class Interpreter {
 			System.out.println(lib.toString());
 		}
 	}
-	public static void main(String[] args) {
-		run();
-	}
 }
