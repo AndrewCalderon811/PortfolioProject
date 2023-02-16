@@ -3,7 +3,7 @@ package madLibs;
 public class MadLib {
 
 	
-	private String[] str = new String[20];
+	private String[] str = new String[100];
 	private int arrayCounter;
 	public MadLib(String mL) {
 		
