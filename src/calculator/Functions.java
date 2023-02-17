@@ -2,59 +2,46 @@ package calculator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Queue;
+import java.util.Stack;
 
 public class Functions {
 	
-	private double result;
-	private double num1;
-	private double num2;
+	private BigDecimal result;
+	private BigDecimal num1;
+	private BigDecimal num2;
+	private char operation = 'x';
 	
 	
 	public Functions() {
-		result = 0;
-		num1 = 0;
-		num2 = 0;
+		result = null;
+		num1 = null;
+		num2 = null;
 	}
 	
-	public Functions(double r, double n1, double n2) {
+	public Functions(BigDecimal r, BigDecimal n1, BigDecimal n2) {
 		result = r;
 		num1 = n1;
 		num2 = n2;
 	}
 
-	private double add(double x, double y) {
-		MathContext mc = MathContext.DECIMAL128;
-		BigDecimal num1 = new BigDecimal(x, mc);
-		BigDecimal num2 = new BigDecimal(y, mc);
-		
-		return num1.doubleValue() + num2.doubleValue();
+	private BigDecimal add(BigDecimal x, BigDecimal y) {
+		return x.add(y);
 	}
 	
-	private double subtract(double x, double y) {
-		MathContext mc = MathContext.DECIMAL128;
-		BigDecimal num1 = new BigDecimal(x, mc);
-		BigDecimal num2 = new BigDecimal(y, mc);
-		
-		return num1.doubleValue() - num2.doubleValue();
+	private BigDecimal subtract(BigDecimal x, BigDecimal y) {
+		return x.subtract(y);
 	}
 	
-	private double multiply(double x, double y) {
-		MathContext mc = MathContext.DECIMAL128;
-		BigDecimal num1 = new BigDecimal(x, mc);
-		BigDecimal num2 = new BigDecimal(y, mc);
-		
-		return num1.doubleValue() * num2.doubleValue();
+	private BigDecimal multiply(BigDecimal x, BigDecimal y) {
+		return x.multiply(y);
 	}
 	
-	private double divide(double x, double y) {
-		MathContext mc = MathContext.DECIMAL128;
-		BigDecimal num1 = new BigDecimal(x, mc);
-		BigDecimal num2 = new BigDecimal(y, mc);
-		
-		return num1.doubleValue() / num2.doubleValue();
+	private BigDecimal divide(BigDecimal x, BigDecimal y) {
+		return x.divide(y);
 	}
 	
-	public double runCalculation(Double[] array, char operation) {
+	public BigDecimal runCalculation(BigDecimal[] array, char operation) {
 		num1 = array[0];
 		num2 = array[1];
 		
@@ -69,5 +56,32 @@ public class Functions {
 		break;
 		}
 		return result;
+	}
+//	, Queue<BigDecimal> decimalNumQue
+	public void loadNum(Queue<BigDecimal> wholeNumQueue) {
+		int counterWholeNum = wholeNumQueue.size() - 1;
+		BigDecimal powerOf = new BigDecimal(10);
+		
+		while(!wholeNumQueue.isEmpty()) {
+			if(num1 != null) {
+			num1 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum))).add(num1);
+			}
+			else {
+				num1 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum)));
+			}
+			counterWholeNum--;
+		}
+	}
+	
+	public BigDecimal getNum() {
+		return num1;
+	}
+	
+	public void setOperation(char op) {
+		operation = op;
+	}
+	
+	public char getOperation() {
+		return operation;
 	}
 }
