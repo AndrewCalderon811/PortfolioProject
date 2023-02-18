@@ -16,12 +16,16 @@ public class UserInterface {
 		frame.setSize(FRAME_SIZE_X, FRAME_SIZE_Y);
 		
 		
-		JPanel panel = new JPanel();
 		
-		JButton[] buttonArray = new JButton[10];
-		for(int i = 0; i < 10; i++) {
-			buttonArray[i] = new JButton(ActionEvent e);
-			panel.add(buttonArray[i]);
+		
+		JPanel[] panelArray = new JPanel[9];
+		
+		for(int i = 0; i < 8; i++) {
+			panelArray[i] = new JPanel();
+			JButton[] buttonArray = new JButton[4];
+			for(int j = 0; j< 4; j++) {
+				buttonArray
+			}
 		}
 		
 		
