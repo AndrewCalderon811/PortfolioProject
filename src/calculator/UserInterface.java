@@ -1,6 +1,7 @@
 package calculator;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.*;
 
@@ -15,23 +16,28 @@ public class UserInterface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(FRAME_SIZE_X, FRAME_SIZE_Y);
 		
+
+		int gridHeight = 3;
+		int gridWidth = 3;
+		int numButtons = 7;
 		
+		int increment = (int)FRAME_SIZE_X/numButtons;
 		
+		JButton[] buttonArray = new JButton[gridHeight*gridWidth];
+		JPanel panel = new JPanel();
 		
-		JPanel[] panelArray = new JPanel[9];
-		
-		for(int i = 0; i < 8; i++) {
-			panelArray[i] = new JPanel();
-			JButton[] buttonArray = new JButton[4];
-			for(int j = 0; j< 4; j++) {
-				buttonArray
-			}
+		for(int i = 0; i < buttonArray.length; i++) {
+			buttonArray[i] = new JButton(String.valueOf(i+1));
+			buttonArray[i].setLayout(null);
+			buttonArray[i].setBounds(((i%gridWidth)*increment), (FRAME_SIZE_Y-(i/gridHeight)*increment)-increment-35, increment, increment);
+			
+			panel.add(buttonArray[i]);
 		}
 		
-		
-		
+		panel.setLayout(null);
+		panel.setBackground(Color.green);
 		frame.add(panel);
-		frame.getContentPane().add(BorderLayout.SOUTH, panel);
+		
 		frame.setVisible(true);
 	}
 }
