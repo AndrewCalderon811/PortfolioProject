@@ -16,15 +16,15 @@ public class Driver {
 			q.add(x);
 		}
 		Functions func = new Functions();
-		func.loadNum(q);
-		System.out.println(func.getNum());
+		func.loadFirstNum(q);
+		System.out.println(func.getFirstNum());
 		
 		BigDecimal[] arr = new BigDecimal[2];
 		arr[0] = x;
 		arr[1] = x;
-		func.setOperation('*');
+		func.setOperation("*");
 		
-		System.out.println(func.runCalculation(arr, func.getOperation()));
+//		System.out.println(func.runCalculation(arr, func.getOperation()));
 		instance.start();
 	}
 }

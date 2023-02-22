@@ -10,7 +10,7 @@ public class Functions {
 	private BigDecimal result;
 	private BigDecimal num1;
 	private BigDecimal num2;
-	private char operation = 'x';
+	private String operation = "x";
 	
 	
 	public Functions() {
@@ -41,26 +41,25 @@ public class Functions {
 		return x.divide(y);
 	}
 	
-	public BigDecimal runCalculation(BigDecimal[] array, char operation) {
-		num1 = array[0];
-		num2 = array[1];
+	public void runCalculation() {
 		
 		switch(operation) {
-		case '+' : result = add(num1, num2);
+		case "+" : result = add(num1, num2);
 		break;
-		case '-' : result = subtract(num1, num2);
+		case "-" : result = subtract(num1, num2);
 		break;
-		case '*' : result = multiply(num1, num2);
+		case "*" : result = multiply(num1, num2);
 		break;
-		case '/' : result = divide(num1, num2);
+		case "/" : result = divide(num1, num2);
 		break;
 		}
-		return result;
+		
+		System.out.println(result);
 	}
-//	, Queue<BigDecimal> decimalNumQue
-	public void loadNum(Queue<BigDecimal> wholeNumQueue) {
+
+	public void loadFirstNum(Queue<BigDecimal> wholeNumQueue) {
 		int counterWholeNum = wholeNumQueue.size() - 1;
-		BigDecimal powerOf = new BigDecimal(10);
+		BigDecimal powerOf = new BigDecimal("10");
 		
 		while(!wholeNumQueue.isEmpty()) {
 			if(num1 != null) {
@@ -71,17 +70,47 @@ public class Functions {
 			}
 			counterWholeNum--;
 		}
+		
+		System.out.println(num1);
 	}
 	
-	public BigDecimal getNum() {
+	public void loadSecondNum(Queue<BigDecimal> wholeNumQueue) {
+		int counterWholeNum = wholeNumQueue.size() - 1;
+		BigDecimal powerOf = new BigDecimal("10");
+		
+		while(!wholeNumQueue.isEmpty()) {
+			if(num2 != null) {
+			num2 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum))).add(num2);
+			}
+			else {
+				num2 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum)));
+			}
+			counterWholeNum--;
+		}
+		
+		System.out.println(num2);
+	}
+	
+	public BigDecimal getFirstNum() {
 		return num1;
 	}
 	
-	public void setOperation(char op) {
+	public BigDecimal getSecondNum() {
+		return num2;
+	}
+	
+	public void setOperation(String op) {
 		operation = op;
 	}
 	
-	public char getOperation() {
+	public String getOperation() {
 		return operation;
+	}
+	
+	public void reset() {
+		num1 = null;
+		num2 = null;
+		operation = "x";
+		result = null;
 	}
 }
