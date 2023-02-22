@@ -24,8 +24,8 @@ public class UserInterface {
 	public void start() {
 		
 		
-		int FRAME_SIZE_X = 700;
-		int FRAME_SIZE_Y = 900;
+		int FRAME_SIZE_X = 400;
+		int FRAME_SIZE_Y = 500;
 		
 		JFrame frame = new JFrame("Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,8 +66,6 @@ public class UserInterface {
 					
 					
 						switch(event.getActionCommand()) {
-						case "+/-" : setNegative = !setNegative;
-						break;
 						case "0" : 
 							numQueue.add(num);
 						break;
@@ -104,6 +102,9 @@ public class UserInterface {
 					}
 					finally {
 						switch(event.getActionCommand()) {
+						case "+/-" : setNegative = !setNegative;
+						System.out.println("setNegative : " + setNegative);
+						break;
 						case "del" : 
 							Queue<BigDecimal> helper = new PriorityQueue<BigDecimal>();
 							while(true) {
@@ -116,7 +117,9 @@ public class UserInterface {
 								numQueue = helper;
 							}
 						break;
-						case "CE" : numQueue.clear();
+						case "CE" : 
+							setNegative = false;
+							numQueue.clear();
 						break;
 						case "C" : 
 							setNegative = false;
@@ -124,29 +127,34 @@ public class UserInterface {
 							func.reset();
 						break;
 						case "/" : 
-							func.loadFirstNum(numQueue);
+							func.loadFirstNum(numQueue, setNegative);
 							func.setOperation(event.getActionCommand());
 							numQueue.clear();
+							setNegative = false;
 						break;
 						case "*" : 
-							func.loadFirstNum(numQueue);
+							func.loadFirstNum(numQueue, setNegative);
 							func.setOperation(event.getActionCommand());
 							numQueue.clear();
+							setNegative = false;
 						break;
 						case "-" : 
-							func.loadFirstNum(numQueue);
+							func.loadFirstNum(numQueue, setNegative);
 							func.setOperation(event.getActionCommand());
 							numQueue.clear();
+							setNegative = false;
 						break;
 						case "+" : 
-							func.loadFirstNum(numQueue);
+							func.loadFirstNum(numQueue, setNegative);
 							func.setOperation(event.getActionCommand());
 							numQueue.clear();
+							setNegative = false;
 						break;
 						case "=" : 
-							func.loadSecondNum(numQueue);
+							func.loadSecondNum(numQueue, setNegative);
 							func.runCalculation();
 							numQueue.clear();
+							setNegative = false;
 						break;
 						}
 					}

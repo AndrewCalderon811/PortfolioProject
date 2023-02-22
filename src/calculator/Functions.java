@@ -43,21 +43,27 @@ public class Functions {
 	
 	public void runCalculation() {
 		
-		switch(operation) {
-		case "+" : result = add(num1, num2);
-		break;
-		case "-" : result = subtract(num1, num2);
-		break;
-		case "*" : result = multiply(num1, num2);
-		break;
-		case "/" : result = divide(num1, num2);
-		break;
+		try {
+			switch(operation) {
+				case "+" : result = add(num1, num2);
+				break;
+				case "-" : result = subtract(num1, num2);
+				break;
+				case "*" : result = multiply(num1, num2);
+				break;
+				case "/" : result = divide(num1, num2);
+				break;
+			}
 		}
-		
+		catch(ArithmeticException e) {
+			MathContext mc = new MathContext();
+			System.out.println(mc.getRoundingMode());
+//			result = num1.divide(num2, null);
+			}
 		System.out.println(result);
 	}
 
-	public void loadFirstNum(Queue<BigDecimal> wholeNumQueue) {
+	public void loadFirstNum(Queue<BigDecimal> wholeNumQueue, boolean n) {
 		int counterWholeNum = wholeNumQueue.size() - 1;
 		BigDecimal powerOf = new BigDecimal("10");
 		
@@ -70,11 +76,13 @@ public class Functions {
 			}
 			counterWholeNum--;
 		}
-		
+		if(n == true) {
+			num1.negate();
+		}
 		System.out.println(num1);
 	}
 	
-	public void loadSecondNum(Queue<BigDecimal> wholeNumQueue) {
+	public void loadSecondNum(Queue<BigDecimal> wholeNumQueue, boolean n) {
 		int counterWholeNum = wholeNumQueue.size() - 1;
 		BigDecimal powerOf = new BigDecimal("10");
 		
@@ -86,6 +94,9 @@ public class Functions {
 				num2 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum)));
 			}
 			counterWholeNum--;
+		}
+		if(n == true) {
+			num2.negate();
 		}
 		
 		System.out.println(num2);

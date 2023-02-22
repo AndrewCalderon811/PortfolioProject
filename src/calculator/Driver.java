@@ -16,7 +16,7 @@ public class Driver {
 			q.add(x);
 		}
 		Functions func = new Functions();
-		func.loadFirstNum(q);
+		func.loadFirstNum(q, false);
 		System.out.println(func.getFirstNum());
 		
 		BigDecimal[] arr = new BigDecimal[2];
@@ -26,5 +26,9 @@ public class Driver {
 		
 //		System.out.println(func.runCalculation(arr, func.getOperation()));
 		instance.start();
+		
+		
+		BigDecimal a = new BigDecimal(-1);
+		System.out.println(a.multiply(x));
 	}
 }
