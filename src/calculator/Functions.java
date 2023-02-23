@@ -14,9 +14,9 @@ public class Functions {
 	
 	
 	public Functions() {
-		result = null;
-		num1 = null;
-		num2 = null;
+		result = new BigDecimal("0");
+		num1 = new BigDecimal("0");
+		num2 = new BigDecimal("0");
 	}
 	
 	public Functions(BigDecimal r, BigDecimal n1, BigDecimal n2) {
@@ -56,10 +56,11 @@ public class Functions {
 			}
 		}
 		catch(ArithmeticException e) {
-			MathContext mc = new MathContext();
-			System.out.println(mc.getRoundingMode());
-//			result = num1.divide(num2, null);
+			MathContext mc = new MathContext(16);
+			result = num1.divide(num2, mc);
 			}
+		num2 = null;
+		num1 = result;
 		System.out.println(result);
 	}
 
@@ -79,7 +80,25 @@ public class Functions {
 		if(n == true) {
 			num1.negate();
 		}
-		System.out.println(num1);
+	}
+	
+	public void loadFirstNum(Queue<BigDecimal> wholeNumQueue, boolean n, int index) {
+		int counterWholeNum = index - 1;
+		BigDecimal powerOf = new BigDecimal("10");
+		MathContext mc = new MathContext(6);
+		
+		while(!wholeNumQueue.isEmpty()) {
+			if(num1 != null) {
+			num1 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum, mc))).add(num1);
+			}
+			else {
+				num1 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum, mc)));
+			}
+			counterWholeNum--;
+		}
+		if(n == true) {
+			num1.negate();
+		}
 	}
 	
 	public void loadSecondNum(Queue<BigDecimal> wholeNumQueue, boolean n) {
@@ -98,8 +117,25 @@ public class Functions {
 		if(n == true) {
 			num2.negate();
 		}
+	}
+	
+	public void loadSecondNum(Queue<BigDecimal> wholeNumQueue, boolean n, int index) {
+		int counterWholeNum = index - 1;
+		BigDecimal powerOf = new BigDecimal("10");
+		MathContext mc = new MathContext(6);
 		
-		System.out.println(num2);
+		while(!wholeNumQueue.isEmpty()) {
+			if(num2 != null) {
+			num2 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum, mc))).add(num2);
+			}
+			else {
+				num2 = (wholeNumQueue.poll().multiply(powerOf.pow(counterWholeNum, mc)));
+			}
+			counterWholeNum--;
+		}
+		if(n == true) {
+			num2.negate();
+		}
 	}
 	
 	public BigDecimal getFirstNum() {
@@ -123,5 +159,17 @@ public class Functions {
 		num2 = null;
 		operation = "x";
 		result = null;
+	}
+	
+	public String resultToString() {
+		return String.valueOf(result);
+	}
+	
+	public String firstNumToString() {
+		return String.valueOf(num1);
+	}
+	
+	public String secondNumToString() {
+		return String.valueOf(num2);
 	}
 }

@@ -10,7 +10,7 @@ public class Driver {
 	public static void main(String[] args) {
 		UserInterface instance = new UserInterface();
 		Queue<BigDecimal> q = new PriorityQueue<BigDecimal>();
-		BigDecimal x = new BigDecimal(5);
+		BigDecimal x = new BigDecimal("10");
 		
 		for(int i = 0; i < 10; i++) {
 			q.add(x);
@@ -28,7 +28,7 @@ public class Driver {
 		instance.start();
 		
 		
-		BigDecimal a = new BigDecimal(-1);
-		System.out.println(a.multiply(x));
+		BigDecimal a = new BigDecimal("-1");
+		System.out.println(Math.pow(10, -4));
 	}
 }
